@@ -15,11 +15,15 @@ export default function GifTable({ ...props }) {
 const GifsShow = ({ ...props }) => {
   const gifs = props.gifs.data;
 
+  const myLoader = ({ src, width, quality }: any) => {
+    return `${src}?w=${width}&q=${quality || 75}`
+  }
+
   return gifs ? (
     <div>
       {" "}
       {gifs.map((gif: any, i: number) => {
-        return <Image key={i} src={gif.images.original.url} alt="" />;
+        return <Image key={i} width="auto" height="auto" loader={myLoader} src={gif.images.original.url} alt="" />;
       })}{" "}
     </div>
   ) : (
